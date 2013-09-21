@@ -9,6 +9,13 @@
 #import "SecondViewController.h"
 
 @interface SecondViewController ()
+{
+    __weak IBOutlet UILabel *millisecsLabel;
+    __weak IBOutlet UILabel *minutesLabel;
+}
+
+- (IBAction)startPressed:(id)sender;
+- (IBAction)resetPressed:(id)sender;
 
 @end
 
@@ -26,4 +33,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)startPressed:(id)sender {
+}
+
+- (IBAction)resetPressed:(id)sender {
+}
 @end

@@ -10,4 +10,6 @@
 
 @interface FirstViewController : UIViewController
 
+-(void)updateCounter:(NSTimer *)theTimer;
+
 @end
