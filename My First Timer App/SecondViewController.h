@@ -10,4 +10,6 @@
 
 @interface SecondViewController : UIViewController
 
+-(void)updateCounter:(NSTimer *)theTimer;
+
 @end

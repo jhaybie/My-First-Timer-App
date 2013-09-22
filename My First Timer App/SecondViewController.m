@@ -10,8 +10,9 @@
 
 @interface SecondViewController ()
 {
-    __weak IBOutlet UILabel *millisecsLabel;
     __weak IBOutlet UILabel *minutesLabel;
+    __weak IBOutlet UIButton *startButton;
+    __weak IBOutlet UIButton *resetButton;
 }
 
 - (IBAction)startPressed:(id)sender;
@@ -19,23 +20,57 @@
 
 @end
 
+
+
 @implementation SecondViewController
+
+
+int hours, minutes, seconds, currentTime;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	currentTime = 0;
+    minutesLabel.text = @"00:00:00";
+    [resetButton setEnabled: NO];
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void)updateCounter:(NSTimer *)theTimer
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    currentTime++;
+    hours           = currentTime / 3600;
+    minutes         = (currentTime % 3600) / 60;
+    seconds         = (currentTime % 3600) % 60;
+    minutesLabel.text = [NSString stringWithFormat: @"%02d:%02d:%02d", hours, minutes, seconds];
+    }
+
+
+- (IBAction)startPressed:(id)sender
+{
+    [resetButton setEnabled: YES];
+    if ([startButton.titleLabel.text isEqual: @"Start"] ||
+        [startButton.titleLabel.text isEqual: @"Resume"])
+    {
+        [startButton setTitle: @"Pause"
+                     forState: UIControlStateNormal];
+    }
+    else
+    {
+        [startButton setTitle: @"Resume"
+                     forState: UIControlStateNormal];
+    }
 }
 
-- (IBAction)startPressed:(id)sender {
+
+- (IBAction)resetPressed:(id)sender
+{
+    [resetButton setEnabled: NO];
+    [startButton setTitle: @"Start"
+                 forState:UIControlStateNormal];
+    minutesLabel.text = @"00:00:00";
 }
 
-- (IBAction)resetPressed:(id)sender {
-}
+
 @end

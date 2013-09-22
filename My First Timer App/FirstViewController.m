@@ -22,25 +22,28 @@
 
 - (IBAction)startPressed: (id)sender;
 - (IBAction)pausePressed: (id)sender;
-- (IBAction)addSecs:      (id)sender;
-
 @end
+
+
 
 @implementation FirstViewController
 
+
 int hours, minutes, seconds, secondsLeft;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    secondsLeft = 0;
+    secondsLeft = 60;
     [pauseButton setEnabled:NO];
     [timerLabel setHidden: YES];
     [pickerWheel setHidden: NO];
 }
 
-- (void)updateCounter:(NSTimer *)theTimer {
+
+- (void)updateCounter:(NSTimer *)theTimer
+{
     if (secondsLeft > 0 )
     {
         secondsLeft--;
@@ -77,8 +80,10 @@ int hours, minutes, seconds, secondsLeft;
     }
 }
 
+
 - (IBAction)startPressed:(id)sender
 {
+    secondsLeft = @(pickerWheel.countDownDuration).intValue;
     if (secondsLeft > 0)
     {
         [pauseButton setEnabled: YES];
@@ -86,11 +91,13 @@ int hours, minutes, seconds, secondsLeft;
         {
             [timerLabel setHidden: NO];
             [pickerWheel setHidden: YES];
-            
-            //Get secondsLeft from pickerWheel values
-            
+            secondsLeft = @(pickerWheel.countDownDuration).intValue;
             if (secondsLeft > 0)
             {
+                hours           = secondsLeft / 3600;
+                minutes         = (secondsLeft % 3600) / 60;
+                seconds         = (secondsLeft % 3600) % 60;
+                timerLabel.text = [NSString stringWithFormat: @"%02d:%02d:%02d", hours, minutes, seconds];
                 [startButton setTitle: @"Cancel"
                              forState: UIControlStateNormal];
                 timer = [NSTimer scheduledTimerWithTimeInterval: 1.0f
@@ -125,6 +132,7 @@ int hours, minutes, seconds, secondsLeft;
                  forState: UIControlStateNormal];    }
 }
 
+
 - (IBAction)pausePressed:(id)sender
 {
     if ([pauseButton.titleLabel.text isEqual: @"Pause"])
@@ -154,20 +162,6 @@ int hours, minutes, seconds, secondsLeft;
                                                 repeats: YES];
     }
 }
-
-
-
-//Remove this later!
-
-- (IBAction)addSecs:(id)sender
-{
-    secondsLeft = secondsLeft + 3;
-    hours           = secondsLeft / 3600;
-    minutes         = (secondsLeft % 3600) / 60;
-    seconds         = (secondsLeft % 3600) % 60;
-    timerLabel.text = [NSString stringWithFormat: @"%02d:%02d:%02d", hours, minutes, seconds];
-}
-
 
 
 @end
