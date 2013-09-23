@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E430035E17EF84CA001F6C16 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = E430035D17EF84CA001F6C16 /* alarm.wav */; };
+		E42815CF17EFEEE000DDF6E9 /* AtomicClockRadio.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E42815CE17EFEEE000DDF6E9 /* AtomicClockRadio.ttf */; };
+		E42815D117EFF27B00DDF6E9 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42815D017EFF27B00DDF6E9 /* alarm.wav */; };
 		E4BC910217EC8D1B0026C2A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BC910117EC8D1B0026C2A4 /* Foundation.framework */; };
 		E4BC910417EC8D1B0026C2A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BC910317EC8D1B0026C2A4 /* CoreGraphics.framework */; };
 		E4BC910617EC8D1B0026C2A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BC910517EC8D1B0026C2A4 /* UIKit.framework */; };
@@ -37,7 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E430035D17EF84CA001F6C16 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = alarm.wav; path = "My First Timer AppTests/alarm.wav"; sourceTree = SOURCE_ROOT; };
+		E42815CE17EFEEE000DDF6E9 /* AtomicClockRadio.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AtomicClockRadio.ttf; sourceTree = "<group>"; };
+		E42815D017EFF27B00DDF6E9 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		E4BC90FE17EC8D1B0026C2A4 /* My First Timer App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My First Timer App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BC910117EC8D1B0026C2A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4BC910317EC8D1B0026C2A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,6 +92,7 @@
 		E4BC90F517EC8D1B0026C2A4 = {
 			isa = PBXGroup;
 			children = (
+				E42815D017EFF27B00DDF6E9 /* alarm.wav */,
 				E4BC910717EC8D1B0026C2A4 /* My First Timer App */,
 				E4BC912917EC8D1C0026C2A4 /* My First Timer AppTests */,
 				E4BC910017EC8D1B0026C2A4 /* Frameworks */,
@@ -137,7 +140,7 @@
 		E4BC910817EC8D1B0026C2A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E430035D17EF84CA001F6C16 /* alarm.wav */,
+				E42815CE17EFEEE000DDF6E9 /* AtomicClockRadio.ttf */,
 				E4BC910917EC8D1B0026C2A4 /* My First Timer App-Info.plist */,
 				E4BC910A17EC8D1B0026C2A4 /* InfoPlist.strings */,
 				E4BC910D17EC8D1B0026C2A4 /* main.m */,
@@ -240,6 +243,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42815D117EFF27B00DDF6E9 /* alarm.wav in Resources */,
+				E42815CF17EFEEE000DDF6E9 /* AtomicClockRadio.ttf in Resources */,
 				E4BC911D17EC8D1B0026C2A4 /* Images.xcassets in Resources */,
 				E4BC910C17EC8D1B0026C2A4 /* InfoPlist.strings in Resources */,
 				E4BC911517EC8D1B0026C2A4 /* Main.storyboard in Resources */,
@@ -250,7 +255,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E430035E17EF84CA001F6C16 /* alarm.wav in Resources */,
 				E4BC912E17EC8D1C0026C2A4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,11 +14,8 @@
     __weak IBOutlet UIDatePicker *pickerWheel;
     __weak IBOutlet UIButton     *startButton;
     __weak IBOutlet UIButton     *pauseButton;
-        
     NSTimer *timer;
-    
 }
-
 - (IBAction)startPressed: (id)sender;
 - (IBAction)pausePressed: (id)sender;
 @end
@@ -28,8 +25,6 @@
 
 int hours, minutes, seconds, secondsLeft;
 
-//@synthesize soundFileURLRef;
-//@synthesize soundFileObject;
 
 - (void)viewDidLoad
 {
@@ -38,6 +33,18 @@ int hours, minutes, seconds, secondsLeft;
     [pauseButton setEnabled:NO];
     [timerLabel setHidden: YES];
     [pickerWheel setHidden: NO];
+    
+    //Assigns the custom font for the timer label
+    
+    [timerLabel setFont:[UIFont fontWithName:@"Atomic Clock Radio" size:45]];
+}
+
+//Releases the sound object when the user dismisses the UIAlertView message
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    AudioServicesRemoveSystemSoundCompletion(soundID);
+    AudioServicesDisposeSystemSoundID(soundID);
 }
 
 
@@ -59,25 +66,25 @@ int hours, minutes, seconds, secondsLeft;
         
         //AudioServices initialization
         
-        //NSURL *sound   = [[NSBundle mainBundle] URLForResource: @"alarm"
-        //                                         withExtension: @"wav"];
-        //soundFileURLRef = (__bridge CFURLRef) sound;
-        //AudioServicesCreateSystemSoundID (soundFileURLRef, &soundFileObject);
-        //AudioServicesPlayAlertSound (soundFileObject);
+        NSURL *soundURL   = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: @"alarm"
+                                                                                    ofType: @"wav"]];
+        AudioServicesCreateSystemSoundID ((__bridge CFURLRef) soundURL, &soundID);
+        AudioServicesPlayAlertSound (soundID);
 
+        
+        //Generate a UIAlertView when timer is done
         
         UIAlertView *message = [[UIAlertView alloc] initWithTitle: @"Timer done"
                                                           message: @""
-                                                         delegate: nil
+                                                         delegate: self
                                                 cancelButtonTitle: @"Dismiss"
                                                 otherButtonTitles: nil];
         [message show];
+        
         [pickerWheel setHidden: NO];
-        [timerLabel setHidden: YES];
-        [startButton setTitle: @"Start"
-                     forState: UIControlStateNormal];
-       // AudioServicesRemoveSystemSoundCompletion(sound);
-       // AudioServicesDisposeSystemSoundID(sound);
+        [timerLabel  setHidden: YES];
+        [startButton  setTitle: @"Start"
+                      forState: UIControlStateNormal];
     }
 }
 
@@ -115,22 +122,22 @@ int hours, minutes, seconds, secondsLeft;
             [pauseButton setTitle: @"Pause"
                          forState: UIControlStateNormal];
             startButton.titleLabel.text = @"Start";
+            timerLabel.text = @"00:00:00";
             [pauseButton setEnabled: NO];
-            [timerLabel setHidden: YES];
+            [timerLabel  setHidden: YES];
             [pickerWheel setHidden: NO];
             [timer invalidate];
-            timerLabel.text = @"00:00:00";
-            
             secondsLeft = 0;
         }
     }
     else
     {
         [pauseButton setEnabled: NO];
-        [pickerWheel setHidden: NO];
-        [timerLabel setHidden: YES];
-        [startButton setTitle: @"Start"
-                 forState: UIControlStateNormal];    }
+        [pickerWheel  setHidden: NO];
+        [timerLabel   setHidden: YES];
+        [startButton   setTitle: @"Start"
+                       forState: UIControlStateNormal];
+    }
 }
 
 
@@ -143,7 +150,6 @@ int hours, minutes, seconds, secondsLeft;
             [pauseButton setTitle: @"Resume"
                          forState: UIControlStateNormal];
             [timer invalidate];
-            
             hours           = secondsLeft / 3600;
             minutes         = (secondsLeft % 3600) / 60;
             seconds         = (secondsLeft % 3600) % 60;
@@ -155,7 +161,6 @@ int hours, minutes, seconds, secondsLeft;
         [pauseButton setTitle: @"Pause"
                      forState: UIControlStateNormal];
         [timer invalidate];
-
         timer = [NSTimer scheduledTimerWithTimeInterval: 1.0f
                                                  target: self
                                                selector: @selector(updateCounter:)

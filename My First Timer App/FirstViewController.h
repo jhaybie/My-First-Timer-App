@@ -9,14 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface FirstViewController : UIViewController
+@interface FirstViewController : UIViewController <UIAlertViewDelegate>
 {
-    //CFURLRef		soundFileURLRef;
-	//SystemSoundID	soundFileObject;
+	SystemSoundID soundID;
 }
-
-//@property (readwrite)	CFURLRef		soundFileURLRef;
-//@property (readonly)	SystemSoundID	soundFileObject;
 
 -(void)updateCounter:(NSTimer *)theTimer;
 

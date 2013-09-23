@@ -38,13 +38,18 @@ int hours, minutes, seconds, hundredths, currentTime;
     minutesLabel.text = @"00:00:00";
     secondsLabel.text = @"00:00:00";
     [resetButton setEnabled: NO];
+    
+    //Assigns the custom font for both timer labels
+    
+    [minutesLabel setFont:[UIFont fontWithName:@"Atomic Clock Radio" size:45]];
+    [secondsLabel setFont:[UIFont fontWithName:@"Atomic Clock Radio" size:16]];
 }
 
 
 - (void)updateCounter:(NSTimer *)theTimer
 {
     currentTime++;
-    hours           = currentTime / 100 / 3600;
+    hours           = (currentTime / 100) / 3600;
     minutes         = (currentTime / 100 % 3600) / 60;
     seconds         = (currentTime / 100 % 3600) % 60;
     hundredths      = (currentTime % 3600) % 60;
@@ -79,8 +84,8 @@ int hours, minutes, seconds, hundredths, currentTime;
 - (IBAction)resetPressed:(id)sender
 {
     [resetButton setEnabled: NO];
-    [startButton setTitle: @"Start"
-                 forState:UIControlStateNormal];
+    [startButton   setTitle: @"Start"
+                   forState:UIControlStateNormal];
     minutesLabel.text = @"00:00:00";
     secondsLabel.text = @"00:00:00";
     [timer invalidate];
