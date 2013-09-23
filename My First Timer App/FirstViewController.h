@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface FirstViewController : UIViewController
+{
+    //CFURLRef		soundFileURLRef;
+	//SystemSoundID	soundFileObject;
+}
+
+//@property (readwrite)	CFURLRef		soundFileURLRef;
+//@property (readonly)	SystemSoundID	soundFileObject;
 
 -(void)updateCounter:(NSTimer *)theTimer;
 

@@ -7,8 +7,6 @@
 //
 
 #import "FirstViewController.h"
-#import <AudioToolbox/AudioToolbox.h>
-
 
 @interface FirstViewController ()
 {
@@ -18,6 +16,7 @@
     __weak IBOutlet UIButton     *pauseButton;
         
     NSTimer *timer;
+    
 }
 
 - (IBAction)startPressed: (id)sender;
@@ -25,12 +24,12 @@
 @end
 
 
-
 @implementation FirstViewController
-
 
 int hours, minutes, seconds, secondsLeft;
 
+//@synthesize soundFileURLRef;
+//@synthesize soundFileObject;
 
 - (void)viewDidLoad
 {
@@ -58,25 +57,27 @@ int hours, minutes, seconds, secondsLeft;
         timerLabel.text = @"00:00:00";
         secondsLeft     = 0;
         
-        //Audio services initialization
+        //AudioServices initialization
         
-        SystemSoundID sound;
-        NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"sample"
-                                                  withExtension:@"caf"];
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &sound);
-        AudioServicesPlayAlertSound(sound);
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Timer done"
-                                                          message:@""
-                                                         delegate:nil
-                                                cancelButtonTitle:@"Dismiss"
-                                                otherButtonTitles:nil];
+        //NSURL *sound   = [[NSBundle mainBundle] URLForResource: @"alarm"
+        //                                         withExtension: @"wav"];
+        //soundFileURLRef = (__bridge CFURLRef) sound;
+        //AudioServicesCreateSystemSoundID (soundFileURLRef, &soundFileObject);
+        //AudioServicesPlayAlertSound (soundFileObject);
+
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: @"Timer done"
+                                                          message: @""
+                                                         delegate: nil
+                                                cancelButtonTitle: @"Dismiss"
+                                                otherButtonTitles: nil];
         [message show];
         [pickerWheel setHidden: NO];
         [timerLabel setHidden: YES];
         [startButton setTitle: @"Start"
                      forState: UIControlStateNormal];
-        AudioServicesRemoveSystemSoundCompletion(sound);
-        AudioServicesDisposeSystemSoundID(sound);
+       // AudioServicesRemoveSystemSoundCompletion(sound);
+       // AudioServicesDisposeSystemSoundID(sound);
     }
 }
 

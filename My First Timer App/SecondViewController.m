@@ -11,6 +11,7 @@
 @interface SecondViewController ()
 {
     __weak IBOutlet UILabel *minutesLabel;
+    __weak IBOutlet UILabel *secondsLabel;
     __weak IBOutlet UIButton *startButton;
     __weak IBOutlet UIButton *resetButton;
     
@@ -27,7 +28,7 @@
 @implementation SecondViewController
 
 
-int hours, minutes, seconds, currentTime;
+int hours, minutes, seconds, hundredths, currentTime;
 
 
 - (void)viewDidLoad
@@ -35,6 +36,7 @@ int hours, minutes, seconds, currentTime;
     [super viewDidLoad];
 	currentTime = 0;
     minutesLabel.text = @"00:00:00";
+    secondsLabel.text = @"00:00:00";
     [resetButton setEnabled: NO];
 }
 
@@ -42,11 +44,13 @@ int hours, minutes, seconds, currentTime;
 - (void)updateCounter:(NSTimer *)theTimer
 {
     currentTime++;
-    hours           = currentTime / 3600;
-    minutes         = (currentTime % 3600) / 60;
-    seconds         = (currentTime % 3600) % 60;
+    hours           = currentTime / 100 / 3600;
+    minutes         = (currentTime / 100 % 3600) / 60;
+    seconds         = (currentTime / 100 % 3600) % 60;
+    hundredths      = (currentTime % 3600) % 60;
     minutesLabel.text = [NSString stringWithFormat: @"%02d:%02d:%02d", hours, minutes, seconds];
-    }
+    secondsLabel.text = [NSString stringWithFormat: @"%02d:%02d:%02d", minutes, seconds, hundredths];
+}
 
 
 - (IBAction)startPressed:(id)sender
@@ -57,7 +61,7 @@ int hours, minutes, seconds, currentTime;
     {
         [startButton setTitle: @"Pause"
                      forState: UIControlStateNormal];
-        timer = [NSTimer scheduledTimerWithTimeInterval: 1.0f
+        timer = [NSTimer scheduledTimerWithTimeInterval: 0.01f
                                                  target: self
                                                selector: @selector(updateCounter:)
                                                userInfo: nil
@@ -78,6 +82,7 @@ int hours, minutes, seconds, currentTime;
     [startButton setTitle: @"Start"
                  forState:UIControlStateNormal];
     minutesLabel.text = @"00:00:00";
+    secondsLabel.text = @"00:00:00";
     [timer invalidate];
     currentTime = 0;
 }
